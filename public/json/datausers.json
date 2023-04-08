@@ -1,0 +1,57 @@
+[
+  {
+    "id": 0,
+    "image": "/image/Mark_Zuckerberg.jpg",
+    "name": "Марк Цукерберг",
+    "birthday": "14.05.1984",
+    "email": "zuckerberg@gmail.com",
+    "role": "user",
+    "status": "active",
+    "news": [{"onenews": "Best work!", "date": "05.10.2003"}],
+    "friends": ["1", "3", "4"]
+  },
+  {
+    "id": 1,
+    "image": "/image/Pavel_Durov.jpg",
+    "name": "Павел Дуров",
+    "birthday": "10.10.1984",
+    "email": "pavel_durov@gmail.com",
+    "role": "admin",
+    "status": "active",
+    "news": [{"onenews": "Tg lives!", "date": "15.09.2015"}],
+    "friends": ["0", "3"]
+  },
+  {
+    "id": 2,
+    "image": "/image/Kevin_Sistrom.jpg",
+    "name": "Кевин Систром",
+    "birthday": "30.12.1983",
+    "email": "kevin_sistrom@gmail.com",
+    "role": "user",
+    "status": "unconfirmed",
+    "news": [{"onenews": "Hi!", "date": "05.01.2020"}],
+    "friends": ["3", "4"]
+  },
+  {
+    "id": 3,
+    "image": "/image/Larry_Page.jpg",
+    "name": "Ларри Пейдж",
+    "birthday": "26.03.1973",
+    "email": "larry_page@gmail.com",
+    "role": "user",
+    "status": "unconfirmed",
+    "news": [{"onenews": "What's app?", "date": "15.05.2017"}],
+    "friends": ["1", "2"]
+  },
+  {
+    "id": 4,
+    "image": "/image/Elon_Musk.jpg",
+    "name": "Илон Маск",
+    "birthday": "28.06.1971",
+    "email": "elon_musk@gmail.com",
+    "role": "user",
+    "status": "locked",
+    "news": [{"onenews": "It's Elon Musk!", "date": "08.06.2018"}],
+    "friends": ["0", "2"]
+  }
+]

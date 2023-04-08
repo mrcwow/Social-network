@@ -1,0 +1,33 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        title= "Пользователь"
+        link(href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css", rel="stylesheet")
+        script(src="https://code.jquery.com/jquery-3.6.0.js")
+        script(src="https://code.jquery.com/ui/1.13.2/jquery-ui.js")
+        link(href="/sass/user.css", rel="stylesheet")
+    body
+        div.page
+            if us
+                div.main
+                    img(src=us.image)
+                    h1 #{us.name}
+                    form(action="/user/" + us.id + "/friends")
+                        button#listfriends Список друзей
+                    form(action="/user/" + us.id + "/news")
+                        button#listnews Список новостей
+
+            div.add
+                h2 Что у вас нового?
+                if us
+                    form(action="/user/" + us.id + "/newnews" method="POST")
+                        textarea#addnews(name="d")
+                        button#publish Опубликовать
+
+            div.news
+                h2 Стена
+                textarea#publnews(readonly) #{list_news}
+
+            form(action="/")
+                button Назад

@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Пользователи</title><link href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" rel="stylesheet"><script src="https://code.jquery.com/jquery-3.6.0.js"></script><script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script><link href="/sass/start_page.css" rel="stylesheet"></head><body><div><h1>Пользователи</h1></div><div class="table"><table><tr><th>Фотография</th><th>Имя пользователя</th><th>Дата рождения</th><th>Email</th><th>Роль</th><th>Статус</th></tr></table><script>$(".date").datepicker();
+$.datepicker.setDefaults({
+    dateFormat: "dd.mm.yy"
+});
+
+$( ".selector" ).selectmenu();
+
+$(document).on('change', '.date', function () {
+    var id_user = this.id.replace('date/', '');
+    var d = this.value;
+    $.ajax({
+        url: "/changedate",
+        method: 'POST',
+        dataType: 'html',
+        data: {id_us: id_user, new_data: d}
+    });
+});
+
+$(document).on('change', '.email', function () {
+    var id_user = this.id.replace('email/', '');
+    var d = this.value;
+    $.ajax({
+        url: "/changeemail",
+        method: 'POST',
+        dataType: 'html',
+        data: {id_us: id_user, new_data: d}
+    });
+});
+
+$(document).on('selectmenuchange', '.selector.sel_role', function () {
+    var id_user = this.id.replace('role/', '');
+    var d = this.value;
+    $.ajax({
+        url: "/changerole",
+        method: 'POST',
+        dataType: 'html',
+        data: {id_us: id_user, new_data: d}
+    });
+});
+
+$(document).on('selectmenuchange', '.selector.sel_status', function () {
+    var id_user = this.id.replace('status/', '');
+    var d = this.value;
+    $.ajax({
+        url: "/changestatus",
+        method: 'POST',
+        dataType: 'html',
+        data: {id_us: id_user, new_data: d}
+    });
+});</script></div></body></html>

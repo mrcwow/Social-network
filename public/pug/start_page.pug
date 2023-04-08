@@ -1,0 +1,107 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        title= "Пользователи"
+        link(href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css", rel="stylesheet")
+        script(src="https://code.jquery.com/jquery-3.6.0.js")
+        script(src="https://code.jquery.com/ui/1.13.2/jquery-ui.js")
+        link(href="/sass/start_page.css" rel="stylesheet")
+    body
+        div
+            h1 Пользователи
+
+        div.table
+            table
+                tr
+                    th Фотография
+                    th Имя пользователя
+                    th Дата рождения
+                    th Email
+                    th Роль
+                    th Статус
+                    if users_data
+                        for us in users_data
+                            tr(id=us.id)
+                                th
+                                    img(src=us.image)
+                                th
+                                    a(href="/user/" + us.id) #{us.name}
+                                th
+                                    input.date(type="text" id="date/" + us.id value=us.birthday)
+                                th
+                                    input.email(type="email" id="email/" + us.id value=us.email pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+                                th
+                                    select.selector.sel_role(name="role" id="role/" + us.id)
+                                        if us.role === "user"
+                                            option(selected= true value="user") Пользователь
+                                            option(value="admin") Администратор
+                                        else
+                                            option(selected= true value="admin") Администратор
+                                            option(value="user") Пользователь
+                                th
+                                    select.selector.sel_status(name="status" id="status/" + us.id)
+                                        if us.status === "unconfirmed"
+                                            option(selected= true value="unconfirmed") Не подтверждённый
+                                            option(value="active") Активный
+                                            option(value="locked") Заблокированный
+                                        else if us.status === "active"
+                                            option(selected= true value="active") Активный
+                                            option(value="unconfirmed") Не подтверждённый
+                                            option(value="locked") Заблокированный
+                                        else
+                                            option(selected= true value="locked") Заблокированный
+                                            option(value="unconfirmed") Не подтверждённый
+                                            option(value="active") Активный
+
+            script.
+                $(".date").datepicker();
+                $.datepicker.setDefaults({
+                    dateFormat: "dd.mm.yy"
+                });
+
+                $( ".selector" ).selectmenu();
+
+                $(document).on('change', '.date', function () {
+                    var id_user = this.id.replace('date/', '');
+                    var d = this.value;
+                    $.ajax({
+                        url: "/changedate",
+                        method: 'POST',
+                        dataType: 'html',
+                        data: {id_us: id_user, new_data: d}
+                    });
+                });
+
+                $(document).on('change', '.email', function () {
+                    var id_user = this.id.replace('email/', '');
+                    var d = this.value;
+                    $.ajax({
+                        url: "/changeemail",
+                        method: 'POST',
+                        dataType: 'html',
+                        data: {id_us: id_user, new_data: d}
+                    });
+                });
+
+                $(document).on('selectmenuchange', '.selector.sel_role', function () {
+                    var id_user = this.id.replace('role/', '');
+                    var d = this.value;
+                    $.ajax({
+                        url: "/changerole",
+                        method: 'POST',
+                        dataType: 'html',
+                        data: {id_us: id_user, new_data: d}
+                    });
+                });
+
+                $(document).on('selectmenuchange', '.selector.sel_status', function () {
+                    var id_user = this.id.replace('status/', '');
+                    var d = this.value;
+                    $.ajax({
+                        url: "/changestatus",
+                        method: 'POST',
+                        dataType: 'html',
+                        data: {id_us: id_user, new_data: d}
+                    });
+                });
